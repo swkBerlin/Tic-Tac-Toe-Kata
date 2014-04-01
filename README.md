@@ -1,0 +1,1 @@
+This is repository for solutions to the Tic Tac Toe katas.
