@@ -1,10 +1,6 @@
 #lang racket
 (provide winner)
 
-
-(define last-move #f)
-
-
 (define (create-next-board board position player)
   (cond
    [(empty? board) board]
@@ -33,9 +29,9 @@
 
 
 (define (change-player p)
-  (if (equal? p 'x)
-      'o
-      'x))
+  (if (equal? p ''x)
+      ''o
+      ''x))
 
 (define (process-move moves last-player current-board)
   (if (empty? moves) #f
@@ -43,7 +39,6 @@
   (let* ([move (first moves)]
          [player (first move)]
          [position (list-ref move 1)])
-    ;; (printf "Move: ~a\n" move);;
     (cond
      [(equal? player last-player) #f] ;invalid move sequence
      [(not (equal? (list-ref current-board position) 'e)) #f] ;already used
@@ -59,5 +54,5 @@
 (define (winner moves)
   "Returns either #f for invalid move sequence or no winner,
   'x or 'o"
-  (process-move moves 'x (build-list 9 (lambda (i) 'e))))
+  (process-move moves (change-player (first (first moves))) (build-list 9 (lambda (i) 'e))))
 
